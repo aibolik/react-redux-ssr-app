@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPosts } from '../../../store/posts';
+import { fetchPosts, createPost, removePost } from '../../../store/posts';
 
 import Feed from '../components';
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchPosts
+  fetchPosts,
+  createPost,
+  removePost
 }, dispatch);
 
 const mapStateToProps = state => ({
