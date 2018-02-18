@@ -12,7 +12,7 @@ delete window.PRELOADED_STATE;
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <App name="hello"/>
+      <App />
     </BrowserRouter>
   </Provider>
 );
