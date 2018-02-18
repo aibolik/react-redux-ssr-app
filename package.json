@@ -5,10 +5,10 @@
   "author": "Aibol Kussain <aibolikdev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server -d --config ./webpack.dev.js",
+    "dev": "webpack-dev-server -d --config ./config/webpack.dev.js",
     "start": "yarn build && babel-node ./src/server",
     "serve": "babel-node ./src/server",
-    "build": "webpack -d"
+    "build": "webpack --config ./config/webpack.prod.js"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
