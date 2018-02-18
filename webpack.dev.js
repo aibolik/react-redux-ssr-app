@@ -8,7 +8,8 @@ module.exports = {
 
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './src/client'
+    contentBase: './src/client',
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -29,8 +30,9 @@ module.exports = {
     })
   ],
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'src/client')
+    filename: 'bundle.js',
+    path: path.join(__dirname, 'build/js'),
+    publicPath: '/js/'
   },
   resolve: {
     extensions: ['.js', '.jsx']

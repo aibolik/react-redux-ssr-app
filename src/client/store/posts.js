@@ -1,5 +1,5 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects';
-
+import { fetchPostsAjax } from '../api';
 
 // Action types
 const FETCH_POSTS = 'posts/FETCH_POSTS';
@@ -12,7 +12,7 @@ export const fetchPosts = () => ({
 
 export const updatePosts = posts => ({
   type: UPDATE_POSTS,
-  payload: posts
+  payload: posts.items
 });
 
 const ACTION_HANDLERS = {
@@ -27,11 +27,9 @@ const ACTION_HANDLERS = {
   })
 };
 
-const url = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=300ecf7f1d8c4128876d195675a1f16b';
-
 // Sagas
 function* fetchPostsAsync() {
-  const posts = yield call(() => fetch(url).then(res => res.json()));
+  const posts = yield call(() => fetchPostsAjax());
 
   yield put(updatePosts(posts));
 }
