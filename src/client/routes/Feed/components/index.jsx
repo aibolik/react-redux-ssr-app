@@ -13,17 +13,22 @@ class Feed extends Component {
     this.props.fetchPosts();
   }
 
+  onFilterChange = (e) => {
+    this.props.filterPosts(e.target.value);
+  };
+
   renderFeed = () => {
-    return this.props.posts.map((item, i) => {
+    return this.props[this.props.filtering ? 'filtered' : 'posts'].map((item, i) => {
       return <FeedListItem post={item} key={i} removePost={this.props.removePost} />
     })
-  }
+  };
 
   render() {
     const { posts, loading, createPost } = this.props;
     return (
       <div>
         <h2>My feed</h2>
+        <input type='text' onChange={this.onFilterChange} placeholder='Filter posts by author' />
         <PostForm createPost={createPost} />
         {loading ? <Loading /> : this.renderFeed()}
       </div>

@@ -8,6 +8,7 @@ const CREATE_POST = 'posts/CREATE_POST';
 const APPEND_POST = 'posts/APPEND_POST';
 const REMOVE_POST = 'posts/REMOVE_POST';
 const POP_POST = 'posts/POP_POST';
+const FILTER_POSTS = 'posts/FILTER_POSTS';
 
 // Action creators
 export const fetchPosts = () => ({
@@ -37,7 +38,12 @@ export const removePost = postId => ({
 export const popPost = postId => ({
   type: POP_POST,
   postId
-})
+});
+
+export const filterPosts = text => ({
+  type: FILTER_POSTS,
+  text
+});
 
 const ACTION_HANDLERS = {
   [FETCH_POSTS]: (state, action) => ({
@@ -78,6 +84,25 @@ const ACTION_HANDLERS = {
     let payload = { ...state };
     payload.items = state.items.filter(item => {
       return item['_id'] !== action.postId;
+    });
+
+    return payload;
+  },
+
+  [FILTER_POSTS]: (state, action) => {
+    let payload = { ...state };
+
+    if (action.text.length === 0) {
+      return {
+        ...state,
+        filtering: false,
+        filtered: []
+      };
+    }
+
+    payload.filtering = true;
+    payload.filtered = state.items.filter(item => {
+      return item.author.toLowerCase().indexOf(action.text.toLowerCase()) >= 0;
     });
 
     return payload;
@@ -127,6 +152,8 @@ export function* saga() {
 const INITIAL_STATE = {
   loading: false,
   items: [],
+  filtered: [],
+  filtering: false
 };
 
 export default function postsReducer (state = INITIAL_STATE, action) {
