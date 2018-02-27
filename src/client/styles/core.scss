@@ -1,0 +1,18 @@
+@import 'normalize';
+@import 'mixins';
+@import 'variables';
+
+@include font-face('Proxima-Nova', '../assets/fonts/proxima-nova/ProximaNova-regular', normal, normal);
+
+body {
+  @include linear-gradient($bg-green, $bg-dark);
+  color: $font-color;
+  min-height: 100vh;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: 'Proxima-Nova', Georgia, Arial;
+}
+
+.page {
+  padding: 12px 32px;
+}

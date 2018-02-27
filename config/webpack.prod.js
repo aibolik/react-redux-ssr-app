@@ -1,8 +1,8 @@
 const path = require('path');
+const webpackMerge = require('webpack-merge');
+const commonWebpackConfigs = require('./webpack.common');
 
-module.exports = {
-  entry: ['babel-polyfill', './src/client/index.jsx'],
-
+module.exports = webpackMerge(commonWebpackConfigs, {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, '../public/js')
@@ -13,14 +13,8 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader'
-        ]
+        use: ['babel-loader']
       }
     ]
-  },
-
-  resolve: {
-    extensions: ['.js', '.jsx']
   }
-};
+});

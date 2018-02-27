@@ -1,0 +1,23 @@
+.user {
+
+  &__name {
+    display: inline-block;
+    margin-right: 12px;
+
+    &::after {
+      content: '|';
+      font-size: 24px;
+      top: 4px;
+      position: relative;
+      margin-left: 12px;
+    }
+  }
+
+  &__log-out {
+    display: inline-block;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
