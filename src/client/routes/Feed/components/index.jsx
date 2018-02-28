@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Loading from '../../../component/Loading';
 import FeedListItem from './FeedListItem';
 import PostForm from '../../../component/PostForm';
+import './index.scss';
 
 class Feed extends Component {
   static propTypes = {
@@ -26,10 +27,10 @@ class Feed extends Component {
   render() {
     const { posts, loading, createPost } = this.props;
     return (
-      <div>
-        <h2>My feed</h2>
+      <div className='feed'>
         <input type='text' onChange={this.onFilterChange} placeholder='Filter posts by author' />
         <PostForm createPost={createPost} />
+        <p className='feed__title'>My feed</p>
         {loading ? <Loading /> : this.renderFeed()}
       </div>
     )

@@ -1,0 +1,41 @@
+.post {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color .3s;
+  margin-bottom: 20px;
+  display: flex;
+  overflow: hidden;
+
+  &__remove {
+    position: relative;
+    align-self: center;
+    margin-right: 12px;
+    position: relative;
+    left: -12px;
+    transition: left .3s;
+    cursor: pointer;
+  }
+
+  &__data {
+    position: relative;
+    left: -12px;
+    transition: left .3s;
+  }
+
+  &:hover &__data {
+    left: 0;
+  }
+
+  &:hover &__remove {
+    left: 0;
+  }
+
+  &:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  &__author {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+}

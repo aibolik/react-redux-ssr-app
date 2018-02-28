@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './index.scss';
 
 class PostForm extends Component {
   static propTypes = {
@@ -14,11 +15,11 @@ class PostForm extends Component {
     this.refs.author.value = '';
     this.refs.text.value = '';
   };
-  
+
   render() {
-    
+
     return (
-      <div>
+      <div className='post-form'>
         <input ref='author' type='text' name='author' placeholder='Author' />
         <textarea ref='text' name='text' placeholder='Your post' />
         <button onClick={this.submitPost}>Submit</button>
