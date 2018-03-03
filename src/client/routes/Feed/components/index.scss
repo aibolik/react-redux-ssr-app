@@ -1,8 +1,32 @@
+@import '../../../styles/variables';
+
 .feed {
 
   &__title {
     font-size: 18px;
     text-transform: uppercase;
     opacity: 0.8;
+  }
+
+  &__filter {
+    background: transparent;
+    padding: 4px 0;
+    color: $font-color;
+    border: none;
+    transition: all .3s;
+    border-bottom: 2px solid transparentize($font-color, .2);
+
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid $font-color;
+
+      &::placeholder {
+        color: $font-color;
+      }
+    }
+
+    &::placeholder {
+      color: transparentize($font-color, 0.2);
+    }
   }
 }

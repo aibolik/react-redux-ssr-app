@@ -28,7 +28,7 @@ class Feed extends Component {
     const { posts, loading, createPost } = this.props;
     return (
       <div className='feed'>
-        <input type='text' onChange={this.onFilterChange} placeholder='Filter posts by author' />
+        <input type='text' className='feed__filter' onChange={this.onFilterChange} placeholder='Filter posts by author' />
         <PostForm createPost={createPost} />
         <p className='feed__title'>My feed</p>
         {loading ? <Loading /> : this.renderFeed()}
