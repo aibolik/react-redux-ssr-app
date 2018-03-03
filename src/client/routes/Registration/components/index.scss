@@ -1,13 +1,15 @@
-@import '../styles/variables';
+@import '../../../styles/variables';
 
-.post-form {
+.form-group {
   margin: 20px 0;
 
-  &__text {
-    color: $font-color;
+  &__input {
+    padding: 4px 0;
     background: transparent;
+    color: $font-color;
     border: none;
     transition: all .3s;
+    border-bottom: 2px solid transparentize($font-color, 0.2);
 
     &:focus {
       outline: none;

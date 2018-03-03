@@ -26,7 +26,7 @@ class PostForm extends Component {
           <span className='input-group__bar' />
           <label className='input-group__label'>Your text</label>
         </div> */}
-        <button className='post-form__btn' onClick={this.submitPost}>Submit</button>
+        <button className='btn' onClick={this.submitPost}>Submit</button>
       </div>
     );
   }
