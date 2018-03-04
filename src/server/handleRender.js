@@ -1,13 +1,13 @@
-import path from 'path';
-import React from 'react';
-import {renderToString} from 'react-dom/server';
-import {StaticRouter} from 'react-router-dom';
-import {Provider} from 'react-redux';
-import pug from 'pug';
+const path = require('path');
+const React = require('react');
+const {renderToString} = require('react-dom/server');
+const {StaticRouter} = require('react-router-dom');
+const {Provider} = require('react-redux');
+const pug = require('pug');
 
-import rootSaga from '../client/store/rootSaga';
-import createStore from '../client/store/createStore';
-import App from '../client/App';
+const rootSaga = require('../client/store/rootSaga');
+const createStore = require('../client/store/createStore');
+const App = require('../client/App.js');
 
 const renderFullPage = (html, preloadedState) => (
   pug.renderFile(path.resolve(__dirname, 'views/index.pug'), {html, preloadedState })
@@ -46,4 +46,4 @@ const handleRender = (req, res) => {
   store.close();
 }
 
-export default handleRender;
+module.exports = handleRender;

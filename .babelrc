@@ -1,3 +1,17 @@
 {
-  "presets": ["env", "react", "stage-2"]
+  "presets": [
+    "stage-0",
+    "react"
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "transform-es2015-classes",
+    [
+      "babel-plugin-webpack-loaders",
+      {
+        "config": "./config/webpack.server.js",
+        "verbose": false
+      }
+    ]
+  ]
 }
