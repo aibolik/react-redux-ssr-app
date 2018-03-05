@@ -6,19 +6,14 @@ const cssLoaderConfig = require('./_css-loader')['production'];
 const commonWebpackConfigs = require('./webpack.common');
 
 const extractSass = new ExtractTextPlugin({
-  // filename: "main.bundle.css",
-  filename: getPath => getPath('js/main.css').replace('js', '../css')
+  filename: 'main.css'
   // disable: process.env.NODE_ENV === "development"
 });
-
-
-
-// publicPath: path.resolve(__dirname, '../public/css')
 
 module.exports = webpackMerge.smart(commonWebpackConfigs, {
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, '../public/js')
+    path: path.resolve(__dirname, '../public/assets')
   },
 
   module: {
@@ -26,19 +21,20 @@ module.exports = webpackMerge.smart(commonWebpackConfigs, {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: {
+          loader: 'babel-loader'
+        }
       }, {
         test: /\.scss$/,
-        use: extractSass.extract([
-          cssLoaderConfig, {
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', {
             loader: 'sass-loader',
             options: {
-              indentedSyntax: false,
               includePaths: ['node_modules/normalize-scss/fork-versions/default', 'src/client/styles']
             }
-          }
-
-        ])
+          }]
+        })
       }
     ]
   },

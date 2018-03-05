@@ -5,13 +5,19 @@ const {StaticRouter} = require('react-router-dom');
 const {Provider} = require('react-redux');
 const pug = require('pug');
 
-const rootSaga = require('../client/store/rootSaga');
-const createStore = require('../client/store/createStore');
-const App = require('../client/App.js');
+const rootSaga = require('../client/store/rootSaga').default;
+const createStore = require('../client/store/createStore').default;
+const App = require('../client/App.js').default;
 
-const renderFullPage = (html, preloadedState) => (
-  pug.renderFile(path.resolve(__dirname, 'views/index.pug'), {html, preloadedState })
-);
+// pug.renderFile(path.resolve(__dirname, 'views/index.pug'), {html, preloadedState })
+
+// const template = require('pug-loader!./views/index.pug').default;
+
+const renderFullPage = (html, preloadedState) => {
+  // const template = require('./views/index.pug');
+  // return template({ html, preloadedState });
+  return pug.renderFile(path.resolve(__dirname, 'views/index.pug'), {html, preloadedState })
+};
 
 const handleRender = (req, res) => {
   const store = createStore();

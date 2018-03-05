@@ -13,7 +13,13 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader'
+          {
+            loader: 'babel-loader',
+            options: {
+              babelrc: false,
+              presets: ['react', 'env', 'stage-2']
+            }
+          }
         ]
       },
       { test: /\.(png|woff|woff2|eot|ttf|svg)$/,
