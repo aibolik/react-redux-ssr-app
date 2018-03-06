@@ -10,7 +10,13 @@ const Navigation = props => (
       <li><NavLink to="/feed" className='links__item' activeClassName='links__item--active'>Feed</NavLink></li>
     </ul>
     <div className='profile'>
-      {props.user ? <User {...props.user} /> : <Link to='/signup' className='links__item'>Sign in</Link>}
+      {props.user
+        ? <User {...props.user} />
+        :
+        <React.Fragment>
+          <Link to='/signup' className='links__item'>Sign Up</Link>
+          <Link to='/signin' className='links__item'>Sign In</Link>
+        </React.Fragment>}
     </div>
   </nav>
 );

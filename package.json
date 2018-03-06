@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "BABEL_DISABLE_CACHE=1 nodemon --watch src/server -- ./src/server",
+    "dev:client": "webpack-dev-server -d --config ./config/webpack.dev.js",
     "start": "NODE_ENV=production BABEL_DISABLE_CACHE=1 babel-node ./lib/server",
     "serve": "babel-node ./src/server",
     "build": "yarn build:server && yarn build:client",

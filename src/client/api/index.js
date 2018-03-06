@@ -35,4 +35,15 @@ export const registerUserAjax = user => {
     },
     body: JSON.stringify(user)
   }).then(res => res.json());
-}
+};
+
+export const singInUserAjax = user => {
+  return fetch(`${BASE_URL}/login`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  }).then(res => res.json());
+};

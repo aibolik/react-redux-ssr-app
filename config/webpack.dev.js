@@ -12,14 +12,27 @@ module.exports = webpackMerge(commonWebpackConfigs, {
     historyApiFallback: true
   },
 
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader', {
+            loader: 'sass-loader',
+            options: {
+              includePaths: ['node_modules/normalize-scss/fork-versions/default', 'src/client/styles']
+            }
+          }
+        ]
+      }
+    ]
+  },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({title: 'Development', filename: './src/client'}),
-    new webpack.DefinePlugin({
-      PRODUCTION: JSON.stringify(false)
-    })
+    new webpack.DefinePlugin({PRODUCTION: JSON.stringify(false)})
   ],
-
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'build/js'),

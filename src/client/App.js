@@ -9,6 +9,7 @@ import Navigation from './component/Navigation';
 import Home from './routes/Home/containers/HomeContainer';
 import Feed from './routes/Feed/containers/FeedContainer';
 import Registration from './routes/Registration/containers/RegistrationContainer';
+import Authentication from './routes/Authentication/containers/AuthenticationContainer';
 
 const App = ({ name }) => {
   const NavigationWithUser = connect(state => ({user: state.user.user}), null)(Navigation);
@@ -21,6 +22,7 @@ const App = ({ name }) => {
           <Route exact path="/" component={Home} />
           <Route path="/feed" component={Feed} />
           <Route path="/signup" component={Registration} />
+          <Route path="/signin" component={Authentication} />
           <Redirect to="/" />
         </Switch>
       </div>
