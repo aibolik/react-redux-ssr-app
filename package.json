@@ -24,6 +24,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
     "clean-webpack-plugin": "^0.1.18",
     "copy-webpack-plugin": "^4.5.0",
     "css-loader": "^0.28.10",
@@ -43,6 +44,7 @@
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "html-loader": "^0.5.5",
     "isomorphic-fetch": "^2.2.1",

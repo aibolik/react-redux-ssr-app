@@ -1,5 +1,6 @@
 const cssLoaderConfig = require('./_css-loader')['production'];
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require('webpack');
 
 module.exports = {
   module: {
@@ -20,5 +21,10 @@ module.exports = {
         loader: 'file-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(false)
+    })
+  ]
 };
