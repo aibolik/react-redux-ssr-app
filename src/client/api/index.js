@@ -37,7 +37,7 @@ export const registerUserAjax = user => {
   }).then(res => res.json());
 };
 
-export const singInUserAjax = user => {
+export const signInUserAjax = user => {
   return fetch(`${BASE_URL}/login`, {
     method: 'POST',
     headers: {

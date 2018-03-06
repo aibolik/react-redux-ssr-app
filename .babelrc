@@ -15,6 +15,5 @@
         "verbose": false
       }
     ]
-  ],
-  "ignore": ["src/client/"]
+  ]
 }

@@ -1,5 +1,5 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects';
-import { registerUserAjax, singInUserAjax } from '../api';
+import { registerUserAjax, signInUserAjax } from '../api';
 
 // Action PropTypes
 const REGISTER_REQUEST = 'user/REGISTER_REQUEST';
@@ -19,7 +19,7 @@ export const registerSuccess = user => ({
   user
 });
 
-export const singInRequest = user => ({
+export const signInRequest = user => ({
   type: SIGNIN_REQUEST,
   user
 });
@@ -64,7 +64,7 @@ export function* watchRegisterUser() {
   yield takeLatest(REGISTER_REQUEST, registerUserAsync)
 }
 
-function* singInAsync(action) {
+function* signInUserAsync(action) {
   const user = yield call(() => signInUserAjax(action.user));
 
   yield(put(signInSuccess(user)));
