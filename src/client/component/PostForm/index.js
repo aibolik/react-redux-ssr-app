@@ -8,10 +8,15 @@ class PostForm extends Component {
   };
 
   submitPost = () => {
-    let author = 'No author';
+    let author = this.props.author;
     let text = this.refs.text.value;
 
-    this.props.createPost({ author, text });
+    if (!author) {
+      alert('You have to be signed in to post here');
+      return;
+    }
+
+    this.props.createPost({ author: author.id, text });
     this.refs.text.value = '';
   };
 

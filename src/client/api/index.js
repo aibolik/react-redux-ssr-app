@@ -1,3 +1,4 @@
+import CookieHelper from '../utils/CookieHelper';
 export const BASE_URL = 'https://sdubot.jsindev.party:1000';
 
 export const fetchPostsAjax = () => {
@@ -10,7 +11,8 @@ export const createPostAjax = post => {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${CookieHelper.readCookie('JwtToken')}`
     },
     body: JSON.stringify(post)
   }).then(res => res.json());
@@ -21,7 +23,8 @@ export const removePostAjax = postId => {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${CookieHelper.readCookie('JwtToken')}`
     }
   }).then(res => res.json());
 };

@@ -7,6 +7,7 @@
   overflow: hidden;
 
   &__remove {
+    display: none;
     position: relative;
     align-self: center;
     margin-right: 12px;
@@ -14,19 +15,26 @@
     left: -12px;
     transition: left .3s;
     cursor: pointer;
+
+    .post--with-author & {
+      display: block;
+    }
   }
 
   &__data {
     position: relative;
-    left: -12px;
-    transition: left .3s;
+    left: 9px;
+    .post--with-author & {
+      left: -12px;
+      transition: left .3s;
+    }
   }
 
-  &:hover &__data {
+  &.post--with-author:hover &__data {
     left: 0;
   }
 
-  &:hover &__remove {
+  &.post--with-author:hover &__remove {
     left: 0;
   }
 

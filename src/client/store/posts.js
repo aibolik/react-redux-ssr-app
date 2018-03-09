@@ -102,7 +102,7 @@ const ACTION_HANDLERS = {
 
     payload.filtering = true;
     payload.filtered = state.items.filter(item => {
-      return item.author.toLowerCase().indexOf(action.text.toLowerCase()) >= 0;
+      return item.author.name.toLowerCase().indexOf(action.text.toLowerCase()) >= 0;
     });
 
     return payload;

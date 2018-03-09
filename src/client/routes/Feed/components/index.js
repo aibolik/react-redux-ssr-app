@@ -20,16 +20,17 @@ class Feed extends Component {
 
   renderFeed = () => {
     return this.props[this.props.filtering ? 'filtered' : 'posts'].map((item, i) => {
-      return <FeedListItem post={item} key={i} removePost={this.props.removePost} />
+      return <FeedListItem userId={this.props.author && this.props.author.id}
+        post={item} key={i} removePost={this.props.removePost} />
     })
   };
 
   render() {
-    const { posts, loading, createPost } = this.props;
+    const { posts, loading, createPost, author } = this.props;
     return (
       <div className='feed'>
         <input type='text' className='feed__filter' onChange={this.onFilterChange} placeholder='Filter posts by author' />
-        <PostForm createPost={createPost} />
+        <PostForm createPost={createPost} author={author} />
         <p className='feed__title'>My feed</p>
         {loading ? <Loading /> : this.renderFeed()}
       </div>

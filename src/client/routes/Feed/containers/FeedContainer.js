@@ -15,8 +15,8 @@ const mapStateToProps = state => ({
   posts: state.posts.items,
   filtered: state.posts.filtered,
   filtering: state.posts.filtering,
-  loading: state.posts.loading
+  loading: state.posts.loading,
+  author: state.user.user
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed);
-
