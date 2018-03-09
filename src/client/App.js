@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { logOut } from './store/user';
 import 'isomorphic-fetch';
 import './styles/core.scss';
 import Navigation from './component/Navigation';
@@ -12,7 +14,9 @@ import Registration from './routes/Registration/containers/RegistrationContainer
 import Authentication from './routes/Authentication/containers/AuthenticationContainer';
 
 const App = ({ name }) => {
-  const NavigationWithUser = connect(state => ({user: state.user.user}), null)(Navigation);
+  const NavigationWithUser = connect(
+    state => ({user: state.user.user}),
+    dispatch => bindActionCreators({ logOut }, dispatch))(Navigation);
 
   return (
     <div className='app'>

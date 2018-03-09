@@ -11,7 +11,7 @@ const Navigation = props => (
     </ul>
     <div className='profile'>
       {props.user
-        ? <User {...props.user} />
+        ? <User {...props.user} logOut={props.logOut} />
         :
         <React.Fragment>
           <Link to='/signup' className='links__item'>Sign Up</Link>

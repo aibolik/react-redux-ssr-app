@@ -4,10 +4,12 @@ const {renderToString} = require('react-dom/server');
 const {StaticRouter} = require('react-router-dom');
 const {Provider} = require('react-redux');
 const pug = require('pug');
+const cookieParser = require('cookie-parser');
 
 const rootSaga = require('../client/store/rootSaga').default;
 const createStore = require('../client/store/createStore').default;
 const App = require('../client/App.js').default;
+const decodeJwtToken = require('../client/utils/').decodeJwtToken;
 
 // pug.renderFile(path.resolve(__dirname, 'views/index.pug'), {html, preloadedState })
 
@@ -20,7 +22,15 @@ const renderFullPage = (html, preloadedState) => {
 };
 
 const handleRender = (req, res) => {
-  const store = createStore();
+  let cookies = cookieParser.JSONCookies(req.cookies);
+  const initialState = {};
+  if(cookies.JwtToken) {
+    initialState.user = {
+      loading: false,
+      user: decodeJwtToken(cookies.JwtToken)
+    }
+  }
+  const store = createStore(initialState);
 
   const context = {};
   const app = (

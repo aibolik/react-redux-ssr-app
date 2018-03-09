@@ -1,5 +1,7 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects';
 import { registerUserAjax, signInUserAjax } from '../api';
+import { decodeJwtToken } from '../utils';
+import CookieHelper from '../utils/CookieHelper';
 
 // Action PropTypes
 const REGISTER_REQUEST = 'user/REGISTER_REQUEST';
@@ -8,6 +10,8 @@ const REGISTER_FAILURE = 'user/REGISTER_FAILURE';
 
 const SIGNIN_REQUEST = 'user/SIGNIN_REQUEST';
 const SIGNIN_SUCCESS = 'user/SIGNIN_SUCCESS';
+
+const LOGOUT = 'user/LOGOUT';
 
 export const requestRegister = user => ({
   type: REGISTER_REQUEST,
@@ -27,7 +31,11 @@ export const signInRequest = user => ({
 export const signInSuccess = user => ({
   type: SIGNIN_SUCCESS,
   user
-})
+});
+
+export const logOut = () => ({
+  type: LOGOUT
+});
 
 const ACTION_HANDLERS = {
   [REGISTER_REQUEST]: (state, action) => ({
@@ -45,17 +53,31 @@ const ACTION_HANDLERS = {
   [SIGNIN_SUCCESS]: (state, action) => ({
     loading: false,
     user: action.user
-  })
+  }),
+  [LOGOUT]: (state, action) => {
+    CookieHelper.eraseCookie('JwtToken');
+    return {
+      loading: false
+    }
+  }
 };
 
 const INITIAL_STATE = {
-  loading: false,
-  user: null
+  loading: false
 };
+
+if (typeof window === 'object') {
+  let token = CookieHelper.readCookie('JwtToken');
+  if (token) {
+    INITIAL_STATE.user = decodeJwtToken(token);
+  }
+}
 
 // Sagas
 function* registerUserAsync(action) {
-  const user = yield call(() => registerUserAjax(action.user));
+  const response = yield call(() => registerUserAjax(action.user));
+
+  let user = decodeJwtToken(response.token);
 
   yield(put(registerSuccess(user)));
 }
@@ -65,7 +87,9 @@ export function* watchRegisterUser() {
 }
 
 function* signInUserAsync(action) {
-  const user = yield call(() => signInUserAjax(action.user));
+  const response = yield call(() => signInUserAjax(action.user));
+
+  let user = decodeJwtToken(response.token);
 
   yield(put(signInSuccess(user)));
 }

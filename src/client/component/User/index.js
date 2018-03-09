@@ -4,7 +4,7 @@ import './index.scss';
 const User = props => (
   <div className='user'>
     <div className='user__name'>{props.name}</div>
-    <div className='user__log-out'>Log out</div>
+    <div className='user__log-out' onClick={props.logOut}>Log out</div>
   </div>
 );
 
