@@ -10,7 +10,7 @@
     "start": "BABEL_DISABLE_CACHE=1 babel-node ./lib/server",
     "serve": "babel-node ./src/server",
     "build": "yarn build:server && yarn build:client",
-    "build:server": "rm -rf lib/ BABEL_DISABLE_CACHE=1 babel -d lib src && node ./config/pug-loader.js",
+    "build:server": "rm -rf lib/ && BABEL_DISABLE_CACHE=1 babel -d lib src && node ./config/pug-loader.js",
     "build:client": "BABEL_DISABLE_CACHE=1 webpack --config config/webpack.prod.js"
   },
   "devDependencies": {
