@@ -7,10 +7,10 @@
   "scripts": {
     "dev": "BABEL_DISABLE_CACHE=1 nodemon --watch src/server -- ./src/server",
     "dev:client": "webpack-dev-server -d --config ./config/webpack.dev.js",
-    "start": "NODE_ENV=production BABEL_DISABLE_CACHE=1 babel-node ./lib/server",
+    "start": "BABEL_DISABLE_CACHE=1 babel-node ./lib/server",
     "serve": "babel-node ./src/server",
     "build": "yarn build:server && yarn build:client",
-    "build:server": "BABEL_DISABLE_CACHE=1 babel -d lib src",
+    "build:server": "rm -rf lib/ BABEL_DISABLE_CACHE=1 babel -d lib src && node ./config/pug-loader.js",
     "build:client": "BABEL_DISABLE_CACHE=1 webpack --config config/webpack.prod.js"
   },
   "devDependencies": {
@@ -31,6 +31,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.10",
     "html-webpack-plugin": "^2.30.1",
+    "ncp": "^2.0.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.17.1",
     "raw-loader": "^0.5.1",
@@ -44,6 +45,7 @@
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {
+    "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",

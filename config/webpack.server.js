@@ -1,8 +1,13 @@
+require('dotenv').config();
+const path = require('path');
 const cssLoaderConfig = require('./_css-loader')['production'];
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
-module.exports = {
+const isProduction = process.env.PRODUCTION;
+
+const config = {
   module: {
     rules: [
       {
@@ -24,7 +29,14 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      PRODUCTION: JSON.stringify(false)
+      'process.env': {
+        NODE_ENV: isProduction
+                    ? JSON.stringify('production')
+                    : JSON.stringify('development')
+      },
+      PRODUCTION: JSON.stringify(isProduction)
     })
   ]
 };
+
+module.exports = config;

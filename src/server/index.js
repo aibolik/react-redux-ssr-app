@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const cookieParser = require('cookie-parser');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackClientConfig = require('../../config/webpack.prod');
+const compression = require('compression');
 
 const isProduction = process.env.PRODUCTION;
 
@@ -21,6 +22,8 @@ app.use(cookieParser());
 if (!isProduction) {
   Object.assign(webpackClientConfig.output, { path: '/' });
   app.use(webpackDevMiddleware(webpack(webpackClientConfig), {}));
+} else {
+  app.use(compression());
 }
 
 app.use(express.static('public'));
