@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test User component renders correctly 1`] = `
+<div
+  className="user"
+>
+  <div
+    className="user__name"
+  >
+    Test name
+  </div>
+  <div
+    className="user__log-out"
+    onClick={[MockFunction]}
+  >
+    Log out
+  </div>
+</div>
+`;
