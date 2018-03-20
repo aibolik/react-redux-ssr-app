@@ -12,7 +12,6 @@ import Home from './routes/Home/containers/HomeContainer';
 import Feed from './routes/Feed/containers/FeedContainer';
 import Registration from './routes/Registration/containers/RegistrationContainer';
 import Authentication from './routes/Authentication/containers/AuthenticationContainer';
-import Todo from './routes/Todo';
 
 const App = ({ name }) => {
   const NavigationWithUser = connect(
@@ -28,7 +27,6 @@ const App = ({ name }) => {
           <Route path="/feed" component={Feed} />
           <Route path="/signup" component={Registration} />
           <Route path="/signin" component={Authentication} />
-          <Route path="/todo" component={Todo} />
           <Redirect to="/" />
         </Switch>
       </div>

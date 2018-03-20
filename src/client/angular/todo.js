@@ -19,7 +19,7 @@ app.filter('customDate', function() {
 //           <h3>This is Todo app</h3>
 //           <ul>
 //             <li ng-repeat='task in tasks'>
-//               {{task}}
+//               {{task.text}}
 //             </li>
 //           </ul>
 //         </div>`,
@@ -35,21 +35,32 @@ app.factory('todoFactory', () => {
   const tasksList = [
     {
       id: 0,
-      text: 'Clean desk',
+      text: 'Yesterdays\' task',
       done: false,
-      createdAt: moment.unix(1521523754)
+      createdAt: moment().subtract(1, 'days')
     },
     {
       id: 1,
-      text: 'Do task',
+      text: 'A week ago',
       done: true,
-      createdAt: moment.unix(1521523754)
-    }
+      createdAt: moment().subtract(7, 'days')
+    },
+    {
+      id: 2,
+      text: 'Today\'s task',
+      done: false,
+      createdAt: moment()
+    },
   ];
 
   return {
     getTasks() {
       return tasksList;
+    },
+    getFilteredTasks(minutesDiff) {
+      return tasksList.filter(item => {
+        return moment().diff(moment.unix(item.createdAt), 'minutes') < minutesDiff;
+      });
     },
     getCompletedTasks() {
       return tasksList.filter(item => item.done);
@@ -70,10 +81,10 @@ app.factory('todoFactory', () => {
 });
 
 app.controller('todoController', ['$scope', 'todoFactory', ($scope, todoFactory) => {
-  console.log('it is called');
   $scope.completedTasks = todoFactory.getCompletedTasks();
   $scope.newTasks = todoFactory.getNewTasks();
   $scope.newTaskName = '';
+  $scope.filter = -1;
 
   $scope.addTask = () => {
     todoFactory.addTask($scope.newTaskName);
@@ -84,6 +95,15 @@ app.controller('todoController', ['$scope', 'todoFactory', ($scope, todoFactory)
     todoFactory.completeTask(task);
     $scope.completedTasks = todoFactory.getCompletedTasks();
     $scope.newTasks = todoFactory.getNewTasks();
+  };
+
+  $scope.dateFilter = task => {
+    if($scope.filter === -1) return true;
+    return Math.abs(moment(task.createdAt).diff(moment(), 'days')) <= $scope.filter;
+  };
+
+  $scope.changeFilter = filter => {
+    $scope.filter = filter;
   };
 
 }]);

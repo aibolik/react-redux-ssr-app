@@ -15,4 +15,38 @@
       }
     }
   }
+
+  .filter {
+    list-style: none;
+
+    &__item {
+      display: inline-block;
+      margin: 0 12px;
+      cursor: pointer;
+
+      &:first-of-type {
+        margin: 0;
+      }
+
+      &::after {
+        content: '';
+        display: block;
+        margin-top: 8px;
+        width: 0;
+        height: 3px;
+        background: #fff;
+        transition: all .3s;
+      }
+
+      &--active::after {
+        width: 70%;
+      }
+
+      &:hover {
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
