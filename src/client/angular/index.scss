@@ -1,0 +1,18 @@
+.todo-app {
+  padding: 12px 32px;
+
+  .tasks {
+    &__created-at {
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    &__item {
+      cursor: pointer;
+
+      &--done {
+        text-decoration: line-through;
+      }
+    }
+  }
+}

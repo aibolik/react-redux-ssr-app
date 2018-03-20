@@ -8,6 +8,7 @@ const Navigation = props => (
     <ul className='links'>
       <li><NavLink exact to="/" className='links__item' activeClassName='links__item--active'>Home</NavLink></li>
       <li><NavLink to="/feed" className='links__item' activeClassName='links__item--active'>Feed</NavLink></li>
+      <li><NavLink to="/todo" className='links__item' activeClassName='links__item--active'>Todo</NavLink></li>
     </ul>
     <div className='profile'>
       {props.user

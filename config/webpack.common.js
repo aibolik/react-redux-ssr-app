@@ -1,7 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  entry: ['babel-polyfill', './src/client/index.js'],
+  entry: {
+    main: ['babel-polyfill', './src/client/index.js'],
+    angular: 'angular',
+    todo:'./src/client/angular/todo'
+  },
 
   resolve: {
     extensions: ['.js', '.jsx']

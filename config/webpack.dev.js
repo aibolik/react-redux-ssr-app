@@ -34,7 +34,7 @@ module.exports = webpackMerge(commonWebpackConfigs, {
     new webpack.DefinePlugin({PRODUCTION: JSON.stringify(false)})
   ],
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.join(__dirname, 'build/js'),
     publicPath: '/js/'
   }

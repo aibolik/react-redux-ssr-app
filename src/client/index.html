@@ -1,14 +1,40 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>React-Redux-Saga App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="/js/angular.bundle.js"></script>
+  <title>React-Redux-Saga App</title>
 </head>
+
 <body>
-    <div id="root"></div>
-    <script src="/js/bundle.js"></script>
+  <div id="root"></div>
+
+  <div ng-app='todoApp' class='todo-app'>
+    <div ng-controller='todoController'>
+      <h3>This is Todo app</h3>
+      <ul>
+        <h4>New todos</h4>
+        <li ng-repeat='task in newTasks' ng-click="completeTask(task)">
+          <span class='tasks__item' ng-class='{"tasks__item--done": task.done}'>{{task.text}}</span>
+          <span class='tasks__created-at'>created at {{task.createdAt | customDate}}</span>
+        </li>
+      </ul>
+
+      <ul>
+        <h4>Completed todos</h4>
+        <li ng-repeat='task in completedTasks' ng-click="completeTask(task)">
+          <span class='tasks__item' ng-class='{"tasks__item--done": task.done}'>{{task.text}}</span>
+          <span class='tasks__created-at'>created at {{task.createdAt | customDate}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="/js/main.bundle.js"></script>
+  <script src="/js/todo.bundle.js"></script>
 </body>
+
 </html>
