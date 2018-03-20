@@ -1,6 +1,7 @@
 import 'angular-route';
 import './index.scss';
 import moment from 'moment';
+import uuid from 'uuid';
 // const app = angular.module('todoApp', [require('angular-route')]);
 const app = angular.module('todoApp', ['ngRoute']);
 
@@ -30,6 +31,23 @@ app.filter('customDate', function() {
 //       });
 // }]
 // );
+app.directive('min20symbols', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, elm, attrs, ctrl) {
+      ctrl.$validators.lengthCheck = function(modelValue, viewValue) {
+        if (ctrl.$isEmpty(modelValue)) {
+          return true;
+        }
+
+        if (viewValue.length < 20) {
+          return false;
+        }
+        return true;
+      };
+    }
+  };
+});
 
 app.factory('todoFactory', () => {
   const tasksList = [
@@ -68,14 +86,12 @@ app.factory('todoFactory', () => {
     getNewTasks() {
       return tasksList.filter(item => !item.done);
     },
-    addTask(text) {
-      tasksList.push(text);
+    addTodo(todo) {
+      tasksList.push(todo);
     },
     completeTask(task) {
       let index = tasksList.findIndex((el) => el === task);
-      console.log(tasksList[index]);
       tasksList[index].done = !tasksList[index].done;
-      console.log(tasksList[index]);
     }
   };
 });
@@ -83,12 +99,28 @@ app.factory('todoFactory', () => {
 app.controller('todoController', ['$scope', 'todoFactory', ($scope, todoFactory) => {
   $scope.completedTasks = todoFactory.getCompletedTasks();
   $scope.newTasks = todoFactory.getNewTasks();
-  $scope.newTaskName = '';
+  $scope.newTodo = '';
   $scope.filter = -1;
+  $scope.textFilter = '';
 
-  $scope.addTask = () => {
-    todoFactory.addTask($scope.newTaskName);
-    $scope.newTaskName = '';
+  $scope.addTodo = () => {
+    console.log($scope.newTodo);
+    let todo = {
+      text: $scope.newTodo,
+      id: uuid.v1(),
+      done: false,
+      createdAt: moment()
+    };
+
+    if(!todo.text) {
+      alert('Text of todo is mandatory...');
+      return;
+    }
+
+    todoFactory.addTodo(todo);
+    $scope.newTodo = '';
+    $scope.completedTasks = todoFactory.getCompletedTasks();
+    $scope.newTasks = todoFactory.getNewTasks();
   };
 
   $scope.completeTask = (task) => {
@@ -100,6 +132,11 @@ app.controller('todoController', ['$scope', 'todoFactory', ($scope, todoFactory)
   $scope.dateFilter = task => {
     if($scope.filter === -1) return true;
     return Math.abs(moment(task.createdAt).diff(moment(), 'days')) <= $scope.filter;
+  };
+
+  $scope.dateFilter = task => {
+    if($scope.textFilter.length === 0) return true;
+    return task.text.toLowerCase().indexOf($scope.textFilter.toLowerCase()) > -1;
   };
 
   $scope.changeFilter = filter => {

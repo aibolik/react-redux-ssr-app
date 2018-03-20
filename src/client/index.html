@@ -15,9 +15,14 @@
   <div ng-app='todoApp' class='todo-app'>
     <div ng-controller='todoController'>
       <h3>This is Todo app</h3>
+      <form ng-submit="addTodo()" name='form'>
+        <input id="new-todo" ng-model='newTodo' placeholder="What you need to do?">
+        <input type="button" value="Add todo" ng-click="addTodo()" />
+      </form>
+      <input ng-model='textFilter' placeholder="Sort by text">
       <ul>
         <h4>New todos</h4>
-        <li ng-repeat='task in newTasks | filter:dateFilter' ng-click="completeTask(task)">
+        <li ng-repeat='task in newTasks | filter:dateFilter:textFilter' ng-click="completeTask(task)">
           <span class='tasks__item' ng-class='{"tasks__item--done": task.done}'>{{task.text}}</span>
           <span class='tasks__created-at'>created at {{task.createdAt | customDate}}</span>
         </li>
