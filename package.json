@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "yarn dev:client",
-    "dev:client": "webpack-dev-server -d --config ./config/webpack.dev.js",
+    "dev:client": "webpack-dev-server --host 0.0.0.0 -d --config ./config/webpack.dev.js",
     "start": "BABEL_DISABLE_CACHE=1 babel-node ./lib/server",
     "serve": "babel-node ./src/server",
     "build": "yarn build:server && yarn build:client",

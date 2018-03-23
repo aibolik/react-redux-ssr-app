@@ -1,6 +1,32 @@
 .todo-app {
   padding: 12px 32px;
 
+  .add-todo {
+    display: block;
+    color: white;
+    padding: 12px 0;
+  }
+
+  .edit-todo {
+    display: inline-block;
+    color: white;
+  }
+
+  .loading {
+    display: none;
+    border: 4px solid white;
+    border-bottom-color: rgba(255, 255, 255, 0.4);
+    animation: spin 1000ms linear infinite;
+    width: 20px;
+    height: 20px;
+    margin: 12px 0;
+    border-radius: 100%;
+
+    &.visible {
+      display: block;
+    }
+  }
+
   .tasks {
     &__created-at {
       font-size: 12px;
@@ -49,4 +75,17 @@
       }
     }
   }
+}
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
