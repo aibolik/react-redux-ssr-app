@@ -47,6 +47,7 @@ function config($locationProvider, $routeProvider) {
             <span class='tasks__item' ng-class='{"tasks__item--done": task.done}'>{{task.text}}</span>
             <span class='tasks__created-at'>created at {{task.createdAt | customDate}}</span>
             <div class='loading loading--small' ng-class='{"visible": task.loading}'></div>
+            <a ng-href='#!/todos/{{task._id}}/edit' class='edit-todo'>Edit</a>
           </li>
         </ul>
 
@@ -55,6 +56,7 @@ function config($locationProvider, $routeProvider) {
           <li ng-repeat='task in completedTasks | filter:dateFilter | filter:textFilter' ng-click="completeTask(task)">
             <span class='tasks__item' ng-class='{"tasks__item--done": task.done}'>{{task.text}}</span>
             <span class='tasks__created-at'>created at {{task.createdAt | customDate}}</span>
+            <div class='loading loading--small' ng-class='{"visible": task.loading}'></div>
             <a ng-href='#!/todos/{{task._id}}/edit' class='edit-todo'>Edit</a>
           </li>
         </ul>
@@ -135,11 +137,8 @@ app.factory('todoFactory', ['$http', ($http) => {
 app.controller('todoListController', ['$scope', 'todoFactory', ($scope, todoFactory) => {
   todoFactory.getTasks().then(items => {
     todoFactory.tasksList = items;
-    console.log('tasksList', todoFactory.tasksList);
     $scope.completedTasks = todoFactory.getCompletedTasks();
     $scope.newTasks = todoFactory.getNewTasks();
-    console.log(todoFactory.getCompletedTasks());
-    console.log(todoFactory.getNewTasks());
   });
   $scope.filter = -1;
   $scope.filteredText = '';
@@ -208,7 +207,6 @@ app.controller('editTodoController', ['$scope', '$http', '$location', '$routePar
 
     $http.get(`https://sdubot.jsindev.party:1000/todos/${$routeParams.todoId}`)
       .then(res => {
-        console.log(res);
         $scope.currentTodo = res.data;
         $scope.loading = false;
       });
