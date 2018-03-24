@@ -46,7 +46,7 @@ function config($locationProvider, $routeProvider) {
           <li ng-repeat='task in newTasks | filter:dateFilter | filter:textFilter' ng-click="completeTask(task)">
             <span class='tasks__item' ng-class='{"tasks__item--done": task.done}'>{{task.text}}</span>
             <span class='tasks__created-at'>created at {{task.createdAt | customDate}}</span>
-            <a ng-href='#!/todos/{{task._id}}/edit' class='edit-todo'>Edit</a>
+            <div class='loading loading--small' ng-class='{"visible": task.loading}'></div>
           </li>
         </ul>
 
@@ -122,7 +122,12 @@ app.factory('todoFactory', ['$http', ($http) => {
     },
     completeTask(task) {
       let index = this.tasksList.findIndex((el) => el === task);
-      this.tasksList[index].done = !this.tasksList[index].done;
+      this.tasksList[index].loading = true;
+      return $http.put(`https://sdubot.jsindev.party:1000/todos/${this.tasksList[index]._id}`, { done: !this.tasksList[index].done })
+        .then(res => {
+          this.tasksList[index] = res.data;
+          return res;
+        });
     }
   };
 }]);
@@ -140,9 +145,16 @@ app.controller('todoListController', ['$scope', 'todoFactory', ($scope, todoFact
   $scope.filteredText = '';
 
   $scope.completeTask = (task) => {
-    todoFactory.completeTask(task);
-    $scope.completedTasks = todoFactory.getCompletedTasks();
-    $scope.newTasks = todoFactory.getNewTasks();
+    todoFactory.completeTask(task)
+      .then(res => {
+        if (res.statusText === 'OK') {
+          $scope.completedTasks = todoFactory.getCompletedTasks();
+          $scope.newTasks = todoFactory.getNewTasks();
+        } else {
+          // Error handler
+          task.loading = false;
+        }
+      });
   };
 
   $scope.dateFilter = task => {
@@ -200,7 +212,7 @@ app.controller('editTodoController', ['$scope', '$http', '$location', '$routePar
         $scope.currentTodo = res.data;
         $scope.loading = false;
       });
-      
+
     $scope.editTodo = () => {
       let todo = {
         text: $scope.currentTodo.text,

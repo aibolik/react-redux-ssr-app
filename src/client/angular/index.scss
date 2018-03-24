@@ -25,6 +25,17 @@
     &.visible {
       display: block;
     }
+
+    &--small {
+      width: 12px;
+      height: 12px;
+      border-width: 2px;
+      margin: 0 8px;
+
+      &.visible {
+        display: inline-block;
+      }
+    }
   }
 
   .tasks {
