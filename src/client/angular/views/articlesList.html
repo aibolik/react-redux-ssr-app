@@ -1,0 +1,10 @@
+<!-- <a href='#!/todos/add' class='add-todo'>Add todo</a> -->
+<p>Total number of articles: {{ $ctrl.articles.length }}</p>
+<ul>
+  <li ng-repeat='article in $ctrl.articles'>
+    <span class='article__item'>{{article.text}}</span>
+    <!-- <span class='tasks__created-at'>created at {{task.createdAt | customDate}}</span> -->
+    <!-- <div class='loading loading--small' ng-class='{"visible": task.loading}'></div> -->
+    <a ng-href='#!/articles/{{article._id}}/edit' class='edit-todo'>Edit</a>
+  </li>
+</ul>

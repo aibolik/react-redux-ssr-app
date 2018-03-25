@@ -1,0 +1,7 @@
+<h3>{{ $ctrl.action === 'EDIT' ? 'Edit article' : 'Create article'}}</h3>
+<form ng-submit="$ctrl.action()">
+  <input id="new-article" ng-model='$ctrl.article.text'>
+  <input type="button" value="{{$ctrl.action === 'EDIT' ? 'Edit article' : 'Add article'}}"
+    ng-click="$ctrl.action === 'EDIT' ? $ctrl.onEdit() : $ctrl.onAdd()" />
+</form>
+<div class='loading' ng-class='{"visible": loading}'></div>
