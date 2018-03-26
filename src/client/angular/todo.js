@@ -107,7 +107,6 @@ app.factory('articleFactory', ['articleService', function(articleService) {
 app.controller('articleController', ['$scope', 'articleFactory', function($scope, articleFactory) {
   console.log('Ctrl init');
   $scope.curPage = 1;
-  $scope.numPages = 5;
   articleFactory.getArticles().then(articles => {
     console.log('Articles retrieved', articles);
     $scope.articles = articles;
@@ -167,7 +166,7 @@ app.component('pagination', {
     ctrl.startPage = 1;
     ctrl.filteredItems = [];
     ctrl.initialized = false;
-    
+
     ctrl.$onChanges = function(change) {
       if (change.items && ctrl.items) {
         if (!ctrl.initialized) {
