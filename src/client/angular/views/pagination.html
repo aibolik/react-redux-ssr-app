@@ -1,0 +1,7 @@
+<div>
+  <p>Total number of items: {{ $ctrl.items.length }}</p>
+  <articles-list articles='$ctrl.filteredItems'></articles-list>
+  <ul class='pagination'>
+    <li class='pagination__item' ng-click='$ctrl.changePage(page)' ng-class='{"pagination__item--active": $ctrl.currentPage === page}' ng-repeat="page in $ctrl.pages">{{ page }}</page>
+  </ul>
+</div>

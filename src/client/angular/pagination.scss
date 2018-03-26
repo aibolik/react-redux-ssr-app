@@ -1,0 +1,14 @@
+.pagination {
+  list-style: none;
+
+  &__item {
+    display: inline-block;;
+    color: #AAF;
+    cursor: pointer;
+    margin: 0 12px;
+
+    &--active {
+      text-decoration: underline;
+    }
+  }
+}

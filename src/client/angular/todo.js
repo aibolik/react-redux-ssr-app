@@ -1,5 +1,6 @@
 import 'angular-route';
 import './index.scss';
+import './pagination.scss';
 import moment from 'moment';
 import uuid from 'uuid';
 const app = angular.module('todoApp', ['ngRoute']);
@@ -105,6 +106,8 @@ app.factory('articleFactory', ['articleService', function(articleService) {
 
 app.controller('articleController', ['$scope', 'articleFactory', function($scope, articleFactory) {
   console.log('Ctrl init');
+  $scope.curPage = 1;
+  $scope.numPages = 5;
   articleFactory.getArticles().then(articles => {
     console.log('Articles retrieved', articles);
     $scope.articles = articles;
@@ -148,5 +151,43 @@ app.component('articlesList', {
   templateUrl: require('./views/articlesList.html'),
   bindings: {
     articles: '='
+  }
+});
+
+app.component('pagination', {
+  templateUrl: require('./views/pagination.html'),
+  bindings: {
+    currentPage: '=',
+    itemsPerPage: '=',
+    items: '<'
+  },
+  controller: function($scope, $element, $attrs) {
+    let ctrl = this;
+    ctrl.pages = [];
+    ctrl.startPage = 1;
+    ctrl.filteredItems = [];
+    ctrl.initialized = false;
+    
+    ctrl.$onChanges = function(change) {
+      if (change.items && ctrl.items) {
+        if (!ctrl.initialized) {
+          ctrl.initialized = true;
+          ctrl.numPages = parseInt(ctrl.items.length / ctrl.itemsPerPage);
+          if (ctrl.numPages * ctrl.itemsPerPage < ctrl.items.length) {
+            ctrl.numPages++;
+          }
+          for(let i = ctrl.startPage; i <= ctrl.numPages; i++) {
+            ctrl.pages.push(i);
+          }
+        }
+        ctrl.filteredItems = ctrl.items.slice((ctrl.currentPage - 1) * ctrl.itemsPerPage, (ctrl.currentPage - 1) * ctrl.itemsPerPage + ctrl.itemsPerPage);
+      }
+    };
+
+    ctrl.changePage = function(page) {
+      ctrl.currentPage = page;
+      ctrl.filteredItems = ctrl.items.slice((ctrl.currentPage - 1) * ctrl.itemsPerPage, (ctrl.currentPage - 1) * ctrl.itemsPerPage + ctrl.itemsPerPage);
+    }
+
   }
 });

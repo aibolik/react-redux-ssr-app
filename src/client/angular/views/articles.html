@@ -1,5 +1,10 @@
 <div>
   <h3>Articles list</h3>
   <a href='#!/articles/add' class='add-todo'>Add article</a>
-  <articles-list articles='articles'></articles-list>
+  <pagination
+    nf-if='articles.length > 0'
+    current-page='curPage'
+    items='articles'
+    items-per-page='4'>
+  </pagination>
 </div>
