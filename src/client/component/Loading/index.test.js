@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from '../../../component/Loading';
+import Loading from './index';
 import renderer from 'react-test-renderer';
 
 describe('Test Loading component', () => {

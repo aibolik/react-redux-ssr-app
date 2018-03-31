@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Navigation component renders correctly with User props 1`] = `
+<nav
+  className="navigation"
+>
+  <ul
+    className="links"
+  >
+    <li>
+      <a
+        aria-current={false}
+        className="links__item"
+        href="/"
+        onClick={[Function]}
+        style={undefined}
+      >
+        Home
+      </a>
+    </li>
+    <li>
+      <a
+        aria-current={false}
+        className="links__item"
+        href="/feed"
+        onClick={[Function]}
+        style={undefined}
+      >
+        Feed
+      </a>
+    </li>
+  </ul>
+  <div
+    className="profile"
+  >
+    <div
+      className="user"
+    >
+      <div
+        className="user__name"
+      >
+        Test Name
+      </div>
+      <div
+        className="user__log-out"
+        onClick={[MockFunction]}
+      >
+        Log out
+      </div>
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`Test Navigation component renders correctly without User props 1`] = `
+<nav
+  className="navigation"
+>
+  <ul
+    className="links"
+  >
+    <li>
+      <a
+        aria-current={false}
+        className="links__item"
+        href="/"
+        onClick={[Function]}
+        style={undefined}
+      >
+        Home
+      </a>
+    </li>
+    <li>
+      <a
+        aria-current={false}
+        className="links__item"
+        href="/feed"
+        onClick={[Function]}
+        style={undefined}
+      >
+        Feed
+      </a>
+    </li>
+  </ul>
+  <div
+    className="profile"
+  >
+    <a
+      className="links__item"
+      href="/signup"
+      onClick={[Function]}
+    >
+      Sign Up
+    </a>
+    <a
+      className="links__item"
+      href="/signin"
+      onClick={[Function]}
+    >
+      Sign In
+    </a>
+  </div>
+</nav>
+`;

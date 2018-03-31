@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import User from '../../../component/User';
+import User from './index';
 import renderer, { shollow as ShallowRenderer } from 'react-test-renderer';
 import TestUtils from 'react-dom/test-utils';
 
