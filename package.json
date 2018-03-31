@@ -12,7 +12,8 @@
     "build": "yarn build:server && yarn build:client",
     "build:server": "rm -rf lib/ && BABEL_DISABLE_CACHE=1 babel -d lib src && node ./config/pug-loader.js",
     "build:client": "BABEL_DISABLE_CACHE=1 webpack --config config/webpack.prod.js",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --collectCoverage=true"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -54,6 +55,8 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "isomorphic-fetch": "^2.2.1",
+    "istanbul": "^0.4.5",
+    "jest-fetch-mock": "^1.5.0",
     "jwt-decode": "^2.2.0",
     "normalize-scss": "^7.0.1",
     "prop-types": "^15.6.0",
