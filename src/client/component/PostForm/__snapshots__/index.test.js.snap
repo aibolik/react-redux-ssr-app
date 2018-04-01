@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test PostForm component renders correctly 1`] = `
+<div
+  className="post-form"
+>
+  <textarea
+    className="post-form__text"
+    placeholder="Your text"
+  />
+  <button
+    className="btn"
+    onClick={[Function]}
+  >
+    Submit
+  </button>
+</div>
+`;
